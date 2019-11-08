@@ -5,6 +5,8 @@ using UnityEngine;
 
 
 public class FollowCam : MonoBehaviour {
+    static public FollowCam S;
+    public bool _____________________________;
     static public GameObject POI; // The static point of interest
 
     [Header("Set in Inspector")]
@@ -16,6 +18,7 @@ public class FollowCam : MonoBehaviour {
 
     private void Awake()
     {
+        S = this;
         camZ = this.transform.position.z;
     }
 
@@ -31,6 +34,8 @@ public class FollowCam : MonoBehaviour {
         {
             // Get the position of the poi
             destination = POI.transform.position;
+            destination.z = camZ;
+            transform.position = destination;
             // If poi is a Projectile, check to see if it's at rest
             if (POI.tag == "Projectile")
             {
